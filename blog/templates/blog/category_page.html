@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+
+{% block main %}
+<div class="container mt-3">
+    <div class="d-flex justify-content-between">
+        <div class="col-7">
+            {% for article in articles %}
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <a href="{% url 'article_detail' article.id %}">
+                            <img src="{{ article.photo.url }}" class="img-fluid rounded-start" alt="...">
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            <p class="card-text">{{ article.description }}</p>
+                            <p class="card-text">
+                                <small class="text-body-secondary">
+                                    {{ article.updated_at }}
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <div class="col-4">
+            {% for article in trends %}
+            <a href="{% url 'article_detail' article.id %}">
+                <div class="card mb-3 text-bg-dark">
+
+                    <img src="{{ article.photo.url }}" class="card-img"
+                         alt="...">
+
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text">{{ article.description }}</p>
+                        <p class="card-text">{{ article.updated_at }}</p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock main %}
